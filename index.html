@@ -6,7 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>IPL 2025 Live Stream</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,10 +24,7 @@
         header img {
             width: 180px;
         }
-        #videoContainer {
-            margin-top: 20px;
-        }
-        video {
+        iframe {
             width: 90%;
             height: 55vh;
             max-width: 900px;
@@ -58,7 +54,7 @@
             h1 {
                 font-size: 20px;
             }
-            video {
+            iframe {
                 height: 50vh;
             }
             .fullscreen-btn {
@@ -75,45 +71,28 @@
         <h1>IPL 2025 Live Streaming</h1>
     </header>
 
-    <div id="videoContainer">
-        <video id="videoPlayer" controls playsinline muted autoplay></video>
-        <br>
-        <button class="fullscreen-btn" onclick="toggleFullscreen()">Watch Fullscreen ⛶</button>
-    </div>
-
+    <iframe id="videoFrame" src="https://user4580.ifrem.net/iframe/frame.php" allowfullscreen></iframe>
+    
+    <br>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Watch Fullscreen ⛶</button>
+    
     <p class="telegram-link">
         <a href="https://t.me/ipl2025liveforfreee">
             <img src="https://1000marcas.net/wp-content/uploads/2021/06/Telegram-logo.png" alt="Telegram Logo">
         </a>
     </p>
-
+    
     <p>Click the Telegram logo to watch IPL for free</p>
 
     <script>
-        const video = document.getElementById('videoPlayer');
-        const streamUrl = 'https://user65873.hls-video.net/hls/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/stream.m3u8';
-
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamUrl;
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        }
-
         function toggleFullscreen() {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
+            const iframe = document.getElementById("videoFrame");
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
             }
         }
     </script>
